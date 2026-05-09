@@ -7,6 +7,7 @@ import time
 from screenshot import take_screenshot
 from analyzer import analyze_screenshot
 from parser import parse_bugs
+from flask import send_from_directory
 
 app = Flask(__name__)
 CORS(app)  # Allow React frontend to call this API
@@ -14,6 +15,10 @@ CORS(app)  # Allow React frontend to call this API
 @app.route("/", methods=["GET"])
 def home():
     return jsonify({"status": "AI Bug Reporter API is running ✅"})
+
+@app.route("/screenshots/<filename>")
+def serve_screenshot(filename):
+    return send_from_directory("screenshots", filename)
 
 
 @app.route("/analyze", methods=["POST"])
