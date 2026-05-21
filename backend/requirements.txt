@@ -1,6 +1,6 @@
 flask
 flask-cors
-playwright
+playwright==1.40.0
 google-generativeai
 python-dotenv
 pillow
