@@ -43,13 +43,13 @@ def analyze():
 
     # ── 2. Take screenshot ──────────────────────────────────────────
     try:
-        screenshot_path = asyncio.run(take_screenshot(url))
+        local_path, screenshot_url = asyncio.run(take_screenshot(url))  # ✅ unpack both
     except Exception as e:
         return jsonify({"error": f"Could not load website: {str(e)}"}), 500
 
     # ── 3. Analyze with Gemini ──────────────────────────────────────
     try:
-        raw_response = analyze_screenshot(screenshot_path, url)
+        raw_response = analyze_screenshot(local_path, url)  # ✅ pass local path to Gemini
     except Exception as e:
         return jsonify({"error": f"AI analysis failed: {str(e)}"}), 500
 
@@ -61,10 +61,11 @@ def analyze():
         "url": url,
         "total_bugs": len(bugs),
         "bugs": bugs,
-        "screenshot_path": screenshot_path,
+        "screenshot_url": screenshot_url,
         "status": "success"
     })
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host="0.0.0.0", port=port)
