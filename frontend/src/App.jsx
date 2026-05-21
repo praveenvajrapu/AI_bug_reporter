@@ -93,7 +93,7 @@ function App() {
 
           {/* Screenshot + Bug Table side by side */}
           <div className="flex flex-col lg:flex-row gap-6">
-            <ScreenshotPanel screenshotPath={result.screenshot_path} url={result.url} />
+                  <ScreenshotPanel screenshotUrl={result.screenshot_url} url={result.url} />
             <BugTable bugs={result.bugs} />
           </div>
         </div>
