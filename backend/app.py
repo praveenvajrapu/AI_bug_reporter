@@ -8,6 +8,8 @@ from screenshot import take_screenshot
 from analyzer import analyze_screenshot
 from parser import parse_bugs
 from flask import send_from_directory
+os.environ["PLAYWRIGHT_BROWSERS_PATH"] = "/opt/render/.cache/ms-playwright"
+
 
 app = Flask(__name__)
 CORS(app)  # Allow React frontend to call this API
@@ -69,3 +71,4 @@ def analyze():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(debug=False, host="0.0.0.0", port=port)
+
