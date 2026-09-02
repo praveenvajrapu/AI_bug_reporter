@@ -1,0 +1,22 @@
+# Render Blueprint. In Render: New > Blueprint > pick this repo.
+# It creates the backend service and prompts you for the four secrets.
+services:
+  - type: web
+    name: ai-bug-reporter-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    region: oregon
+    healthCheckPath: /
+    envVars:
+      # sync: false = Render asks you for the value and stores it encrypted.
+      # Never commit these.
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false

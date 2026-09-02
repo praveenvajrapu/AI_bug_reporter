@@ -1,7 +1,12 @@
 flask
 flask-cors
+gunicorn
 playwright==1.44.0
 google-generativeai
 python-dotenv
 pillow
 cloudinary
+
+# Used by the standalone helper scripts, not by the web service:
+fpdf2          # json_to_pdf.py  (provides the `fpdf` module; NOT the old `fpdf` package)
+requests       # test.py

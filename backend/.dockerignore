@@ -1,0 +1,8 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+screenshots/
+result.json
+bug_report.pdf
