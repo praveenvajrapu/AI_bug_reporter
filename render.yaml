@@ -8,7 +8,6 @@ services:
     dockerContext: ./backend
     plan: free
     region: oregon
-    healthCheckPath: /
     envVars:
       # sync: false = Render asks you for the value and stores it encrypted.
       # Never commit these.
