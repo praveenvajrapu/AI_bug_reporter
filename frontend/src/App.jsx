@@ -5,6 +5,10 @@ import Loader from "./components/Loader";
 import ScreenshotPanel from "./components/ScreenshotPanel";
 import BugTable from "./components/BugTable";
 
+// Backend base URL. Set VITE_API_URL to override (see .env.development /
+// .env.production). Falls back to the local Flask server.
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:5000";
+
 function App() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,7 +27,7 @@ function App() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/analyze", {
+      const response = await fetch(`${API_BASE_URL}/analyze`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
